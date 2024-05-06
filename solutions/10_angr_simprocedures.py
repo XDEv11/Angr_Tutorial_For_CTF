@@ -2,7 +2,7 @@ import angr
 import claripy
 import sys
 
-def main():
+if __name__ == '__main__':
     # create project
     proj = angr.Project('../problems/10_angr_simprocedures')
     # entry point
@@ -38,13 +38,7 @@ def main():
     simulation = proj.factory.simgr(init_state)
     simulation.explore(find=success, avoid=fail)
 
-    if simulation.found:
-        solution_state = simulation.found[0]
-        flag = solution_state.posix.dumps(sys.stdin.fileno())
-        print('flag: ', flag)
-    else:
-        print('no solution')
-    
-if __name__ == '__main__':
-    main()
+	solution_state = simulation.found[0]
+	flag = solution_state.posix.dumps(sys.stdin.fileno())
+	print(flag)
     
